@@ -12,6 +12,7 @@ function getComputerChoice() {
 
 let humanScore = 0;
 let computerScore = 0;
+let roundCounter = 0;
 const maxRounds = 5;
 
 
@@ -54,6 +55,27 @@ function playRound(humanChoice, computerChoice) {
      
 }
 
+
+let roundResult
+const container = document.querySelector('.container');
+
+const scoreDiv = document.createElement('div');
+container.appendChild(scoreDiv);
+
+const humanScoreDisplay = document.querySelector(".human_score");
+const computerScoreDisplay = document.querySelector(".computer_score");
+
+function updateScore (roundResult) {
+    if (roundResult === 'human Won') {
+        humanScore += 1;
+    } else if (roundResult === 'computer Won') {
+        computerScore += 1;
+    }
+    humanScoreDisplay.textContent = "Your score is: " + humanScore;
+    computerScoreDisplay.textContent = "Computer score is " + computerScore;
+
+ }
+
 function handleButtonClick(humanChoice) {
     if (roundCounter < maxRounds) {
         roundCounter++;
@@ -76,41 +98,13 @@ function handleButtonClick(humanChoice) {
         }
     }
 }
-let roundResult
-const container = document.querySelector('.container');
 
-const scoreDiv = document.createElement('div');
-container.appendChild(scoreDiv);
+document.getElementById('rock').addEventListener('click', () => handleButtonClick('rock'));
+document.getElementById('paper').addEventListener('click', () => handleButtonClick('paper'));
+document.getElementById('scissors').addEventListener('click', () => handleButtonClick('scissors'));
 
-const humanScoreDisplay = document.querySelector(".human_score");
-const computerScoreDisplay = document.querySelector(".computer_score");
 
- document.getElementById('rock').addEventListener('click', ()=> {
-    roundResult = playRound('rock', getComputerChoice())
-    console.log(roundResult);
-    updateScore(roundResult)
- })
- document.getElementById('paper').addEventListener('click', ()=> {
-    roundResult = playRound('paper', getComputerChoice())
-    console.log(roundResult)
-    updateScore(roundResult)
- })
- document.getElementById('scissors').addEventListener('click', ()=> {
-    roundResult = playRound('scissors', getComputerChoice())
-    console.log(roundResult)
-    updateScore(roundResult)
- })
 
- function updateScore (roundResult) {
-    if (roundResult === 'human Won') {
-        humanScore += 1;
-    } else if (roundResult === 'computer Won') {
-        computerScore += 1;
-    }
-    humanScoreDisplay.textContent = "Your score is: " + humanScore;
-    computerScoreDisplay.textContent = "Computer score is " + computerScore;
-
- }
 
 
 
